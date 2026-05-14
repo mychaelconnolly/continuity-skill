@@ -1,0 +1,7 @@
+interface:
+  display_name: "Continuity"
+  short_description: "Manual project memory in Markdown"
+  default_prompt: "Use $continuity to save a concise project-local resume note before I switch sessions or tools."
+
+policy:
+  allow_implicit_invocation: true
