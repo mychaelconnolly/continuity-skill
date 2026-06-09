@@ -8,6 +8,14 @@ Manual project memory for coding agents.
 
 It is intentionally boring: one `SKILL.md`, one Markdown output file, no service, no database, no background capture.
 
+<p align="center">
+  <a href="examples/CONTINUITY.example.md">
+    <img src="assets/continuity-example.png" alt="An example .agent-continuity/CONTINUITY.md produced by the skill — current goal, verified facts, an append-only work log, and a resume prompt" width="600">
+  </a>
+</p>
+
+<p align="center"><sub>What you get: an example <a href="examples/CONTINUITY.example.md"><code>.agent-continuity/CONTINUITY.md</code></a> — current goal, verified facts, an append-only work log, and a resume prompt.</sub></p>
+
 ## Grounded in official guidance
 
 `continuity` follows the published standards for how agent skills should be built — so it triggers reliably, installs cleanly across tools, and ages well as agent memory matures. It is built to the guidance, not just inspired by it:
