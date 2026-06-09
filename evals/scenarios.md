@@ -1,6 +1,6 @@
 # Continuity skill evaluations
 
-Four scenarios covering the skill's distinct modes and its core safety rules. Each uses the
+Five scenarios covering the skill's distinct modes and its core safety rules. Each uses the
 fields `skills`, `query`, optional `setup` (starting state) and `files` (input paths), and
 `expected_behavior` (graded assertions). See [README.md](README.md) for how to run them.
 
