@@ -79,6 +79,8 @@ For agent runtime state, record when relevant:
 
 Never record secrets, tokens, passwords, private keys, `.env` values, credential contents, sensitive personal data, or raw sensitive media details. If a sensitive location matters for resume, record only the minimum pointer (note it under Risks And Traps) and say not to expose the secret.
 
+Redaction overrides preservation. If a prior Work Log entry or head section already contains a secret that should never have been recorded, redact it in place — replace the value with `[redacted]` or a minimal pointer — even though entries are otherwise append-only. Note the redaction (not the value) in the new Work Log entry.
+
 Do not enumerate, search, index, or materialize protected cloud-storage roots unless the user explicitly names that storage location and approves the scope in the current task. Protected roots include user cloud-storage mounts such as `~/Library/CloudStorage` on macOS, Proton Drive, iCloud Drive, Dropbox, Google Drive, OneDrive, and other FileProvider-backed folders.
 
 Separate facts from assumptions. Use `Unknown`, `Not inspected`, or `Not run` instead of guessing. Do not infer completion from memory alone.
@@ -92,7 +94,7 @@ When updating an existing record:
 1. Read the current `.agent-continuity/CONTINUITY.md` first, including its Work Log.
 2. Refresh the current-state head (every section above Work Log) to reflect live state.
 3. Before dropping any detail from the head, capture it in a new Work Log entry so nothing is lost.
-4. Prepend one new Work Log entry for this session. Never delete, reorder, or rewrite existing Work Log entries.
+4. Prepend one new Work Log entry for this session. Never delete, reorder, or rewrite existing Work Log entries — except to redact a secret that should never have been recorded (see Safety Rules).
 5. If a prior fact or assumption is now wrong, do not erase it. Record the correction in the new entry so the history of what changed is preserved.
 
 Keep entries concise. Never auto-prune the Work Log. Trimming or archiving old entries is a separate, explicit step the user must approve (see Continuity Audit).
@@ -181,7 +183,7 @@ Before finishing:
 - Verify `.agent-continuity/CONTINUITY.md` is in the intended project.
 - Read back the continuity record.
 - When updating, confirm every prior Work Log entry is still present and exactly one new entry was added.
-- Run a safe secret-pattern check without printing secret values.
+- Run a safe secret-pattern check without printing secret values. If it finds a secret in any current or prior content, redact it in place before finishing (see Safety Rules).
 - Confirm explicit `Unknown`, `Not inspected`, or `Not run` markers where information is missing.
 
 Final response: report the continuity path, what resume state was preserved, validation status, and the next action.

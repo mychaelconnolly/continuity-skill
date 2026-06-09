@@ -15,9 +15,9 @@ Treat this file as both agent memory and human-readable project documentation. I
 3. Record only verified state. Mark gaps as `Unknown`, `Not inspected`, or `Not run`.
 4. Separate facts from assumptions.
 5. Include the next action as a single concrete step.
-6. Preserve history. The record is cumulative: refresh the current-state head, but prepend a new dated Work Log entry and never delete, reorder, or rewrite earlier entries. If a prior fact is now wrong, record the correction in the new entry instead of erasing it.
+6. Preserve history. The record is cumulative: refresh the current-state head, but prepend a new dated Work Log entry and never delete, reorder, or rewrite earlier entries. If a prior fact is now wrong, record the correction in the new entry instead of erasing it. Secrets are the one exception: if a prior entry already contains one, redact it in place rather than preserving it.
 7. Do not record secrets, tokens, passwords, private keys, raw credential values, or sensitive personal data. If a sensitive location matters for resume, record only a minimal pointer under Risks And Traps and say not to expose the secret.
-8. Read the record back before finishing and run a safe secret-pattern check without printing secret values.
+8. Read the record back before finishing and run a safe secret-pattern check without printing secret values; if the check finds a secret anywhere in the record, redact it in place before finishing.
 
 ## Output Path
 
