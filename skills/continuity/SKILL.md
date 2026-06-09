@@ -38,10 +38,9 @@ Record the local project path plus runtime state, read/write boundaries, status 
 Choose the root conservatively:
 
 1. If inside a Git repo, use `git rev-parse --show-toplevel`.
-2. Treat `/Users/michael/codex` as a workspace root, not a project root.
-3. Prefer direct child projects under `/Users/michael/codex/<project>`.
-4. If no single project is clear, ask for the target project folder.
-5. Do not write at `/Users/michael/codex` unless the user explicitly requests workspace-level continuity.
+2. If the working directory sits inside a multi-project workspace (a parent folder holding several project subfolders), treat that parent as a workspace root, not the project root. Prefer the specific project subfolder you are working in.
+3. If no single project is clear, ask for the target project folder.
+4. Do not write at a workspace root unless the user explicitly requests workspace-level continuity.
 
 ## Inspect First
 
@@ -49,6 +48,7 @@ Use fresh state. Keep inspection targeted.
 
 For all projects, inspect when available:
 
+- existing `.agent-continuity/CONTINUITY.md`, including its Work Log, when present
 - `pwd`
 - applicable `AGENTS.md` instructions
 - README or key local notes relevant to resuming work
@@ -79,9 +79,23 @@ For agent runtime state, record when relevant:
 
 Never record secrets, tokens, passwords, private keys, `.env` values, credential contents, sensitive personal data, or raw sensitive media details. If a sensitive location matters for resume, record only the minimum pointer and say not to expose the secret.
 
-Do not enumerate, search, index, or materialize protected cloud-storage roots unless the user explicitly names that storage location and approves the scope in the current task. Protected roots include `/Users/michael/Library/CloudStorage`, Proton Drive, iCloud Drive, Dropbox, Google Drive, OneDrive, and other FileProvider-backed folders.
+Do not enumerate, search, index, or materialize protected cloud-storage roots unless the user explicitly names that storage location and approves the scope in the current task. Protected roots include user cloud-storage mounts such as `~/Library/CloudStorage` on macOS, Proton Drive, iCloud Drive, Dropbox, Google Drive, OneDrive, and other FileProvider-backed folders.
 
 Separate facts from assumptions. Use `Unknown`, `Not inspected`, or `Not run` instead of guessing. Do not infer completion from memory alone.
+
+## Update Semantics
+
+The continuity record is cumulative. Preserve history; do not overwrite it.
+
+When updating an existing record:
+
+1. Read the current `.agent-continuity/CONTINUITY.md` first, including its Work Log.
+2. Refresh the current-state head (every section above Work Log) to reflect live state.
+3. Before dropping any detail from the head, capture it in a new Work Log entry so nothing is lost.
+4. Prepend one new Work Log entry for this session. Never delete, reorder, or rewrite existing Work Log entries.
+5. If a prior fact or assumption is now wrong, do not erase it. Record the correction in the new entry so the history of what changed is preserved.
+
+Keep entries concise. Never auto-prune the Work Log. Trimming or archiving old entries is a separate, explicit step the user must approve (see Continuity Audit).
 
 ## Continuity Format
 
@@ -143,6 +157,22 @@ Branch: `<branch>` or `N/A`
 Resume work in <project path>. Read `.agent-continuity/CONTINUITY.md` first, then inspect live state before making changes. Current goal: <goal>. Next action: <next action>.
 ```
 
+## Work Log
+
+Append-only. Newest entry first. Never edit or delete earlier entries.
+
+### <local timestamp with timezone> - <short session label>
+
+- Effort: <what this session worked on>
+- Changed: <files, commands, or state touched, or `None`>
+- Outcome: <result, decision, or correction to an earlier entry>
+
+### <earlier local timestamp with timezone> - <short session label>
+
+- Effort: <prior session summary>
+- Changed: <prior session changes>
+- Outcome: <prior session result>
+
 ## Secrets Note
 
 - No secrets, tokens, passwords, private keys, credential contents, or sensitive personal data were intentionally recorded.
@@ -154,6 +184,7 @@ Before finishing:
 
 - Verify `.agent-continuity/CONTINUITY.md` is in the intended project.
 - Read back the continuity record.
+- When updating, confirm every prior Work Log entry is still present and exactly one new entry was added.
 - Run a safe secret-pattern check without printing secret values.
 - Confirm explicit `Unknown`, `Not inspected`, or `Not run` markers where information is missing.
 

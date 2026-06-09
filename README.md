@@ -27,7 +27,7 @@ When invoked, the skill tells the agent to inspect current state and create or u
 .agent-continuity/CONTINUITY.md
 ```
 
-The note captures:
+The record captures:
 
 - current goal
 - verified state and assumptions
@@ -37,7 +37,10 @@ The note captures:
 - runtime state when relevant
 - decisions, constraints, risks, and next action
 - a resume prompt for the next session or next tool
+- an append-only work log of past sessions
 - a secrets note
+
+The record is cumulative. Each run refreshes the current-state head and prepends a new dated work-log entry; it never deletes earlier entries. History is preserved across updates, so you accumulate a record of efforts as they are made, while the top of the file stays a clean resume point.
 
 This is useful when you want memory you can see and control.
 
@@ -158,6 +161,9 @@ continuity-skill/
 ├── LICENSE
 ├── adapters/
 │   └── generic-prompt.md
+├── evals/
+│   ├── README.md
+│   └── scenarios.md
 ├── examples/
 │   └── CONTINUITY.example.md
 └── skills/
