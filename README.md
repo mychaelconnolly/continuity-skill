@@ -2,9 +2,19 @@
 
 Manual project memory for coding agents.
 
+[![Built to the Agent Skills spec](https://img.shields.io/badge/Agent_Skills-spec-5436DA)](https://agentskills.io/specification) [![Follows Anthropic Skill best practices](https://img.shields.io/badge/Anthropic-best_practices-D97757?logo=anthropic&logoColor=white)](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices) [![Ships an OpenAI Codex interface](https://img.shields.io/badge/OpenAI_Codex-skills-412991?logo=openai&logoColor=white)](https://developers.openai.com/codex/skills) [![License: MIT](https://img.shields.io/badge/License-MIT-3DA639)](LICENSE)
+
 `continuity` is a small Agent Skill that writes a durable project-local memory note at `.agent-continuity/CONTINUITY.md` when you ask for it. It gives the current agent a clean resume point, gives future humans readable project documentation, and keeps context with the project folder even if you switch sessions, machines, agents, or tools.
 
 It is intentionally boring: one `SKILL.md`, one Markdown output file, no service, no database, no background capture.
+
+## Grounded in official guidance
+
+`continuity` follows the published standards for how agent skills should be built — so it triggers reliably, installs cleanly across tools, and ages well as agent memory matures. It is built to the guidance, not just inspired by it:
+
+- **[Agent Skills specification](https://agentskills.io/specification)** (agentskills.io) — the cross-vendor standard the skill conforms to: a `SKILL.md` folder with YAML frontmatter and progressive disclosure.
+- **[Anthropic — Skill authoring best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)** — third-person trigger descriptions, a sub-500-line `SKILL.md`, and eval-first design. The repo ships an [`evals/`](evals/) suite to match.
+- **[OpenAI — Codex Skills](https://developers.openai.com/codex/skills)** — the Codex install path, plus the bundled [`agents/openai.yaml`](skills/continuity/agents/openai.yaml) interface for Codex.
 
 ## Why This Exists
 
@@ -175,12 +185,18 @@ continuity-skill/
 
 ## References
 
-- [Agent Skills specification](https://agentskills.io/specification)
-- [OpenAI Codex Skills](https://developers.openai.com/codex/skills)
+**Authoritative sources** — the standards and guidance `continuity` is built to:
+
+- [Agent Skills specification](https://agentskills.io/specification) — agentskills.io
+- [Anthropic — Skill authoring best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)
+- [OpenAI — Codex Skills](https://developers.openai.com/codex/skills)
+- [Claude Code skills](https://code.claude.com/docs/en/skills)
+
+**Ecosystem** — related agent-memory tooling and docs:
+
 - [OpenAI Codex Memories](https://developers.openai.com/codex/memories)
 - [OpenAI Codex feature maturity](https://developers.openai.com/codex/feature-maturity)
 - [OpenAI skills catalog](https://github.com/openai/skills)
-- [Claude Code skills](https://code.claude.com/docs/en/skills)
 - [Gemini CLI Agent Skills](https://geminicli.com/docs/cli/tutorials/skills-getting-started/)
 - [Gemini CLI Auto Memory](https://geminicli.com/docs/cli/auto-memory/)
 - [xAI Grok Code Fast](https://docs.x.ai/developers/models/grok-code-fast-1)
