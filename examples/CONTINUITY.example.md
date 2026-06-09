@@ -73,7 +73,3 @@ Resume work in /Users/alex/projects/weather-dashboard. Read `.agent-continuity/C
 - Effort: Scaffolded the chart toolbar and reviewed the existing fetch path.
 - Changed: `WeatherChart.tsx` (toolbar shell only).
 - Outcome: Assumed auto-refresh polling would be added next. Later revised; see the entry above.
-
-## Secrets Note
-
-- No secrets, tokens, passwords, private keys, credential contents, or sensitive personal data were intentionally recorded.

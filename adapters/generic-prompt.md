@@ -16,7 +16,7 @@ Treat this file as both agent memory and human-readable project documentation. I
 4. Separate facts from assumptions.
 5. Include the next action as a single concrete step.
 6. Preserve history. The record is cumulative: refresh the current-state head, but prepend a new dated Work Log entry and never delete, reorder, or rewrite earlier entries. If a prior fact is now wrong, record the correction in the new entry instead of erasing it.
-7. Do not record secrets, tokens, passwords, private keys, raw credential values, or sensitive personal data.
+7. Do not record secrets, tokens, passwords, private keys, raw credential values, or sensitive personal data. If a sensitive location matters for resume, record only a minimal pointer under Risks And Traps and say not to expose the secret.
 8. Read the record back before finishing and run a safe secret-pattern check without printing secret values.
 
 ## Output Path
@@ -94,8 +94,4 @@ Append-only. Newest entry first. Never edit or delete earlier entries.
 - Effort: <what this session worked on>
 - Changed: <files, commands, or state touched, or `None`>
 - Outcome: <result, decision, or correction to an earlier entry>
-
-## Secrets Note
-
-- No secrets, tokens, passwords, private keys, credential contents, or sensitive personal data were intentionally recorded.
 ```

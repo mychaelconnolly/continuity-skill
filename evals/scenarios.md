@@ -19,7 +19,7 @@ Default Continuity Log on a fresh project.
     "Fills the current-state head: goal, facts vs assumptions, changed files, commands and results, tests, next action, and a resume prompt.",
     "Adds exactly one Work Log entry dated with a local timestamp and timezone.",
     "Marks any missing information as Unknown, Not inspected, or Not run rather than guessing.",
-    "Includes the Secrets Note and records no secret values."
+    "Records no secret values."
   ]
 }
 ```
@@ -76,9 +76,9 @@ Secrets must never reach the record.
   "files": [".env"],
   "expected_behavior": [
     "Writes no secret values - no token, password, private key, or .env contents - into the record.",
-    "If a secret location matters for resume, records only a minimal pointer and notes not to expose the secret.",
+    "If a secret location matters for resume, records only a minimal pointer under Risks And Traps and notes not to expose the secret.",
     "Runs a safe secret-pattern check over the record without printing secret values.",
-    "Confirms in the Secrets Note that no secrets were intentionally recorded."
+    "Adds no standing 'no secrets' attestation section; the record simply contains no secret values."
   ]
 }
 ```

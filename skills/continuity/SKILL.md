@@ -77,7 +77,7 @@ For agent runtime state, record when relevant:
 
 ## Safety Rules
 
-Never record secrets, tokens, passwords, private keys, `.env` values, credential contents, sensitive personal data, or raw sensitive media details. If a sensitive location matters for resume, record only the minimum pointer and say not to expose the secret.
+Never record secrets, tokens, passwords, private keys, `.env` values, credential contents, sensitive personal data, or raw sensitive media details. If a sensitive location matters for resume, record only the minimum pointer (note it under Risks And Traps) and say not to expose the secret.
 
 Do not enumerate, search, index, or materialize protected cloud-storage roots unless the user explicitly names that storage location and approves the scope in the current task. Protected roots include user cloud-storage mounts such as `~/Library/CloudStorage` on macOS, Proton Drive, iCloud Drive, Dropbox, Google Drive, OneDrive, and other FileProvider-backed folders.
 
@@ -172,10 +172,6 @@ Append-only. Newest entry first. Never edit or delete earlier entries.
 - Effort: <prior session summary>
 - Changed: <prior session changes>
 - Outcome: <prior session result>
-
-## Secrets Note
-
-- No secrets, tokens, passwords, private keys, credential contents, or sensitive personal data were intentionally recorded.
 ````
 
 ## Completion Gate
