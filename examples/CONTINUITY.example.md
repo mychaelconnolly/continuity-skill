@@ -60,6 +60,20 @@ Run `npm run lint`, then test the refresh path against staging.
 Resume work in /Users/alex/projects/weather-dashboard. Read `.agent-continuity/CONTINUITY.md` first, then inspect live state before making changes. Current goal: add manual refresh controls to the weather chart. Next action: run `npm run lint`, then test the refresh path against staging.
 ```
 
+## Work Log
+
+### 2026-05-14 10:15:00 America/New_York - refresh controls and tests
+
+- Effort: Added the refresh button, loading state, and an explicit refresh reason on the fetch path; wrote success and failure unit tests.
+- Changed: `WeatherChart.tsx`, `weatherClient.ts`, `WeatherChart.test.tsx`.
+- Outcome: Decided to keep refresh manual for this pass. Supersedes the 2026-05-13 assumption that polling would be added.
+
+### 2026-05-13 16:40:00 America/New_York - scaffolding
+
+- Effort: Scaffolded the chart toolbar and reviewed the existing fetch path.
+- Changed: `WeatherChart.tsx` (toolbar shell only).
+- Outcome: Assumed auto-refresh polling would be added next. Later revised; see the entry above.
+
 ## Secrets Note
 
 - No secrets, tokens, passwords, private keys, credential contents, or sensitive personal data were intentionally recorded.

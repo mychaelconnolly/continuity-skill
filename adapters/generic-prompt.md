@@ -2,19 +2,22 @@
 
 Use these instructions in agents that do not discover Agent Skills natively.
 
+> Canonical source: `skills/continuity/SKILL.md`. This adapter keeps the format inline on purpose, because it targets tools without skill or file discovery. Keep the two in sync when either changes.
+
 When the user asks to preserve work state for later, such as "log work", "save continuity", "continue later", "resume work", "session clearing", "history clearing", or "save critical context", create or update `.agent-continuity/CONTINUITY.md` in the active project.
 
 Treat this file as both agent memory and human-readable project documentation. It should let a future agent, model, or human resume work without relying on hidden conversation history.
 
 ## Behavior
 
-1. Inspect current state before writing. Use fresh facts from the project, not memory alone.
+1. Read the existing `.agent-continuity/CONTINUITY.md`, including its Work Log, before writing. Then inspect current state with fresh facts from the project, not memory alone.
 2. Choose the project root conservatively. If inside a Git repo, use the repo root. Do not write at a workspace root unless the user explicitly asks for workspace-level continuity.
 3. Record only verified state. Mark gaps as `Unknown`, `Not inspected`, or `Not run`.
 4. Separate facts from assumptions.
 5. Include the next action as a single concrete step.
-6. Do not record secrets, tokens, passwords, private keys, raw credential values, or sensitive personal data.
-7. Read the note back before finishing and run a safe secret-pattern check without printing secret values.
+6. Preserve history. The record is cumulative: refresh the current-state head, but prepend a new dated Work Log entry and never delete, reorder, or rewrite earlier entries. If a prior fact is now wrong, record the correction in the new entry instead of erasing it.
+7. Do not record secrets, tokens, passwords, private keys, raw credential values, or sensitive personal data.
+8. Read the record back before finishing and run a safe secret-pattern check without printing secret values.
 
 ## Output Path
 
@@ -81,6 +84,16 @@ Branch: `<branch>` or `N/A`
 ```text
 Resume work in <project path>. Read `.agent-continuity/CONTINUITY.md` first, then inspect live state before making changes. Current goal: <goal>. Next action: <next action>.
 ```
+
+## Work Log
+
+Append-only. Newest entry first. Never edit or delete earlier entries.
+
+### <local timestamp with timezone> - <short session label>
+
+- Effort: <what this session worked on>
+- Changed: <files, commands, or state touched, or `None`>
+- Outcome: <result, decision, or correction to an earlier entry>
 
 ## Secrets Note
 
