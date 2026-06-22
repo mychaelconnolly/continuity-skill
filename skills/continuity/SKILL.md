@@ -33,6 +33,32 @@ Use when work depends on running processes, dev servers, remote hosts, services,
 
 Record the local project path plus runtime state, read/write boundaries, status files, resume commands, and stop/cleanup commands only when already known or verified.
 
+## Model Routing
+
+Optional cost optimization. If a `continuity-writer` profile is installed (a Claude subagent or a Codex
+custom agent; see `profiles/`), an **ordinary Continuity Log** may be delegated to it so the routine
+writing runs on a strong one-tier-down model at low effort. This is opt-in and never required.
+
+Delegate to `continuity-writer` only when **all** of these hold; otherwise run the skill inline on the
+current model:
+
+- the request is a plain Continuity Log ("log work", "save state", "continue later"), and
+- there is no audit, secret-redaction, multi-root, runtime-heavy, or ambiguous-root signal, and
+- the `continuity-writer` profile is actually available.
+
+When delegating, pass the session state you already hold (current goal, decisions, commands already run
+and their results, changed files, next action) plus the project path into the profile's prompt — it
+starts with a fresh context and will otherwise under-capture state. The profile inspects live project
+state itself and writes the record.
+
+Keep the following **inline on the current (stronger) model** — never delegate them: Continuity Audit,
+secret detection or redaction (see Safety Rules), Runtime Continuity, multi-root or workspace-level
+logging, and anything where the project root is ambiguous. If a delegated profile returns
+`CONTINUITY_DECLINE: <reason>`, handle the task inline yourself.
+
+Fallback: if no `continuity-writer` profile is installed, the skill is fully usable as-is — just run it
+inline. Routing changes only which model writes the record, never the record format or safety rules.
+
 ## Project Root
 
 Choose the root conservatively:
