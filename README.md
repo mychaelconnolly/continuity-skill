@@ -56,7 +56,6 @@ The record captures:
 - decisions, constraints, risks, and next action
 - a resume prompt for the next session or next tool
 - an append-only work log of past sessions
-- a secrets note
 
 The record is cumulative. Each run refreshes the current-state head and prepends a new dated work-log entry; it never deletes earlier entries. History is preserved across updates, so you accumulate a record of efforts as they are made, while the top of the file stays a clean resume point.
 
@@ -132,7 +131,9 @@ Paste it into the agent's project instructions or custom prompt area. The behavi
 
 ## Model Routing (Optional)
 
-The skill works the same on whatever model you run it with. If you want ordinary logging to run cheaper, install a bundled `continuity-writer` profile so plain "log work" requests are delegated to a strong one-tier-down model at low effort, while risky work (audits, secret redaction, multi-root, runtime-heavy handoffs) stays on the stronger/current model.
+The skill works the same on whatever model you run it with. If you want ordinary logging to run cheaper, install a bundled `continuity-writer` profile so plain "log work" requests can be delegated to a strong one-tier-down model at low effort, while risky work (audits, secret redaction, multi-root, runtime-heavy handoffs) stays on the stronger/current model.
+
+Routing is best-effort, not enforced: a runtime may still log inline on the current model even with the profile installed. To force the cheaper path, name the profile explicitly — for example, "use the continuity-writer profile to log work."
 
 ```sh
 # Claude Code

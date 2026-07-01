@@ -39,12 +39,17 @@ Optional cost optimization. If a `continuity-writer` profile is installed (a Cla
 custom agent; see `profiles/`), an **ordinary Continuity Log** may be delegated to it so the routine
 writing runs on a strong one-tier-down model at low effort. This is opt-in and never required.
 
-Delegate to `continuity-writer` only when **all** of these hold; otherwise run the skill inline on the
-current model:
+**Prefer** to delegate to `continuity-writer` only when **all** of these hold; otherwise run the skill
+inline on the current model:
 
 - the request is a plain Continuity Log ("log work", "save state", "continue later"), and
 - there is no audit, secret-redaction, multi-root, runtime-heavy, or ambiguous-root signal, and
 - the `continuity-writer` profile is actually available.
+
+This routing is **best-effort, not enforced**: even with the profile installed and these conditions met,
+a runtime may still log inline on the current model, and that is an acceptable fallback — not a failure.
+To force the cheaper path, name the profile explicitly, e.g. "use the continuity-writer profile to log
+work."
 
 When delegating, pass the session state you already hold (current goal, decisions, commands already run
 and their results, changed files, next action) plus the project path into the profile's prompt — it

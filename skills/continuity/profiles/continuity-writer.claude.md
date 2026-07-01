@@ -45,6 +45,18 @@ Facts/Assumptions; Changed Or Relevant Files; Commands And Results; Tests And Va
 Decisions And Constraints; Risks And Traps; Next Action; Resume Prompt; then an append-only Work Log).
 If a record already exists, mirror its existing sections exactly.
 
+## Before finishing
+
+You run in a fresh context, so verify your own output rather than trusting memory:
+
+- Confirm `.agent-continuity/CONTINUITY.md` is in the intended project.
+- Read the record back.
+- Confirm every prior Work Log entry is still present and exactly one new entry was added.
+- Run a safe secret-pattern check over the record without printing secret values. If it finds a secret
+  in any current or prior content, stop and reply `CONTINUITY_DECLINE: prior secret needs redaction` — do
+  not redact it yourself.
+- Confirm explicit `Unknown`, `Not inspected`, or `Not run` markers where information is missing.
+
 ## Report back
 
 Return: the continuity path written, what resume state was preserved, validation status, and the next

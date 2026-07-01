@@ -59,6 +59,20 @@ above); do not edit the installed profile or `SKILL.md` independently and let th
 package changes, re-copy the profile and re-apply the **Model Routing** section of `SKILL.md` to your
 installed skill.
 
+Verify an installed copy is in sync by diffing it against the package (run from the repo root):
+
+```sh
+# profiles
+diff skills/continuity/profiles/continuity-writer.claude.md ~/.claude/agents/continuity-writer.md
+diff skills/continuity/profiles/continuity-writer.codex.toml ~/.codex/agents/continuity-writer.toml
+# whole skill folder (drop -q to see the lines that differ)
+diff -qr skills/continuity ~/.claude/skills/continuity
+```
+
+An installed `SKILL.md` may legitimately differ from the package if you have added local-only sections
+on top of it; in that case diff to confirm only your intended local additions differ, and that the
+shared sections (including **Model Routing**) still match the package.
+
 **Re-apply to every installed skill copy, not just one.** The skill commonly lives in more than one
 place at once — a tool-specific dir (`~/.claude/skills/continuity/`, a Codex skills dir, `.claude/skills/`
 in a project) **and** the cross-tool `~/.agents/skills/continuity/` discovery alias. A tool reads the

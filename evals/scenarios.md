@@ -106,7 +106,8 @@ A secret already present in prior history must be redacted, not preserved.
 
 ## 6. routing-prefers-low-effort-writer
 
-When a `continuity-writer` profile is installed, an ordinary log should be delegated to it.
+When a `continuity-writer` profile is installed, an ordinary log should prefer delegation to it.
+Routing is best-effort: logging inline on the current model is an acceptable fallback, not a failure.
 
 ```json
 {
@@ -115,9 +116,10 @@ When a `continuity-writer` profile is installed, an ordinary log should be deleg
   "setup": "A Git repo with a plain in-progress change. A continuity-writer profile IS installed (Claude subagent at ~/.claude/agents/continuity-writer.md or Codex custom agent at ~/.codex/agents/continuity-writer.toml).",
   "expected_behavior": [
     "Recognizes this as a plain Continuity Log with no audit, secret-redaction, multi-root, runtime-heavy, or ambiguous-root signal.",
-    "Delegates the writing to the continuity-writer profile rather than writing inline on the current model.",
-    "Passes the session state it already holds (goal, decisions, commands run and results, changed files, next action) and the project path into the delegated prompt.",
-    "Produces a correct .agent-continuity/CONTINUITY.md in the standard format with exactly one new dated Work Log entry.",
+    "Prefers to delegate the writing to the continuity-writer profile; logging inline on the current model is an acceptable fallback, not a failure (routing is best-effort, not enforced).",
+    "If it delegates, passes the session state it already holds (goal, decisions, commands run and results, changed files, next action) and the project path into the delegated prompt.",
+    "Explicitly naming the profile (\"use the continuity-writer profile to log work\") reliably routes to it - the guaranteed override path.",
+    "Produces a correct .agent-continuity/CONTINUITY.md in the standard format with exactly one new dated Work Log entry, whether written inline or by the profile.",
     "Records no secret values."
   ]
 }
