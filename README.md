@@ -56,7 +56,6 @@ The record captures:
 - decisions, constraints, risks, and next action
 - a resume prompt for the next session or next tool
 - an append-only work log of past sessions
-- a secrets note
 
 The record is cumulative. Each run refreshes the current-state head and prepends a new dated work-log entry; it never deletes earlier entries. History is preserved across updates, so you accumulate a record of efforts as they are made, while the top of the file stays a clean resume point.
 
@@ -130,6 +129,22 @@ adapters/generic-prompt.md
 
 Paste it into the agent's project instructions or custom prompt area. The behavior is the same: create or update `.agent-continuity/CONTINUITY.md` when explicitly asked.
 
+## Model Routing (Optional)
+
+The skill works the same on whatever model you run it with. If you want ordinary logging to run cheaper, install a bundled `continuity-writer` profile so plain "log work" requests can be delegated to a strong one-tier-down model at low effort, while risky work (audits, secret redaction, multi-root, runtime-heavy handoffs) stays on the stronger/current model.
+
+Routing is best-effort, not enforced: a runtime may still log inline on the current model even with the profile installed. To force the cheaper path, name the profile explicitly — for example, "use the continuity-writer profile to log work."
+
+```sh
+# Claude Code
+cp skills/continuity/profiles/continuity-writer.claude.md ~/.claude/agents/continuity-writer.md
+
+# Codex
+cp skills/continuity/profiles/continuity-writer.codex.toml ~/.codex/agents/continuity-writer.toml
+```
+
+This is optional: with no profile installed, the skill runs inline on the current model with no loss of function. Routing changes only which model writes the record, never the format or the safety rules. See [`skills/continuity/profiles/README.md`](skills/continuity/profiles/README.md) for profile names, install paths, model-routing behavior, fallback, and the sync workflow.
+
 ## Usage
 
 Examples:
@@ -187,8 +202,12 @@ continuity-skill/
 └── skills/
     └── continuity/
         ├── SKILL.md
-        └── agents/
-            └── openai.yaml
+        ├── agents/
+        │   └── openai.yaml
+        └── profiles/
+            ├── README.md
+            ├── continuity-writer.claude.md
+            └── continuity-writer.codex.toml
 ```
 
 ## References
