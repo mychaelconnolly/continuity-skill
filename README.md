@@ -1,10 +1,23 @@
-# continuity-skill
+<div align="center">
 
-Manual project memory for coding agents.
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/continuity-mark-dark.svg">
+  <img src="assets/continuity-mark-light.svg" alt="⋯" width="240">
+</picture>
+
+# continuity
+
+**Manual project memory for coding agents.**
+
+Ask your agent to "log work" — get a durable, human-readable resume note that lives with your project.
 
 [![Built to the Agent Skills spec](https://img.shields.io/badge/Agent_Skills-spec-5436DA)](https://agentskills.io/specification) [![Follows Anthropic Skill best practices](https://img.shields.io/badge/Anthropic-best_practices-D97757?logo=anthropic&logoColor=white)](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices) [![Ships an OpenAI Codex interface](https://img.shields.io/badge/OpenAI_Codex-skills-412991?logo=openai&logoColor=white)](https://developers.openai.com/codex/skills) [![License: MIT](https://img.shields.io/badge/License-MIT-3DA639)](LICENSE)
 
-`continuity` is a small Agent Skill that writes a durable project-local memory note at `.agent-continuity/CONTINUITY.md` when you ask for it. It gives the current agent a clean resume point, gives future humans readable project documentation, and keeps context with the project folder even if you switch sessions, machines, agents, or tools.
+</div>
+
+---
+
+`continuity` is a small [Agent Skill](https://agentskills.io/specification) that writes a project-local memory note at `.agent-continuity/CONTINUITY.md` — on demand, never in the background. The current agent gets a clean resume point. Future humans get readable project documentation. The context stays with the project folder even if you switch sessions, machines, agents, or tools.
 
 It is intentionally boring: one `SKILL.md`, one Markdown output file, no service, no database, no background capture.
 
@@ -16,86 +29,28 @@ It is intentionally boring: one `SKILL.md`, one Markdown output file, no service
 
 <p align="center"><sub>What you get: an example <a href="examples/CONTINUITY.example.md"><code>.agent-continuity/CONTINUITY.md</code></a> — current goal, verified facts, an append-only work log, and a resume prompt.</sub></p>
 
-## Grounded in official guidance
+## Quick Start
 
-`continuity` follows the published standards for how agent skills should be built — so it triggers reliably, installs cleanly across tools, and ages well as agent memory matures. It is built to the guidance, not just inspired by it:
-
-- **[Agent Skills specification](https://agentskills.io/specification)** (agentskills.io) — the cross-vendor standard the skill conforms to: a `SKILL.md` folder with YAML frontmatter and progressive disclosure.
-- **[Anthropic — Skill authoring best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)** — third-person trigger descriptions, a sub-500-line `SKILL.md`, and eval-first design. The repo ships an [`evals/`](evals/) suite to match.
-- **[OpenAI — Codex Skills](https://developers.openai.com/codex/skills)** — the Codex install path, plus the bundled [`agents/openai.yaml`](skills/continuity/agents/openai.yaml) interface for Codex.
-
-## Why This Exists
-
-I made this in May 2026, while agent memory is still moving quickly across Codex, Claude, Gemini, Grok-backed tools, MCP memory servers, and stateful-agent frameworks. I expect agentic memory to become more native, consent-aware, auditable, project-scoped, and portable soon.
-
-While that settles, I still want a manual switch:
-
-- "log work"
-- "save continuity"
-- "prepare for session clearing"
-- "write down what the next agent needs"
-
-The result is both agent memory and project documentation. The agent gets the verified state it needs to resume. I get a Markdown record I can inspect, edit, commit or ignore, and carry with the project.
-
-## What It Does
-
-When invoked, the skill tells the agent to inspect current state and create or update:
-
-```text
-.agent-continuity/CONTINUITY.md
-```
-
-The record captures:
-
-- current goal
-- verified state and assumptions
-- relevant files
-- commands already run and results
-- tests and validation
-- runtime state when relevant
-- decisions, constraints, risks, and next action
-- a resume prompt for the next session or next tool
-- an append-only work log of past sessions
-
-The record is cumulative. Each run refreshes the current-state head and prepends a new dated work-log entry; it never deletes earlier entries. History is preserved across updates, so you accumulate a record of efforts as they are made, while the top of the file stays a clean resume point.
-
-This is useful when you want memory you can see and control.
-
-## Why It Is Portable
-
-The skill uses the Agent Skills convention: a folder with `SKILL.md` and YAML frontmatter. That makes it plug-and-play in tools that support Agent Skills, and easy to adapt for tools that do not.
-
-- Codex can install the skill directly.
-- Claude Code can use the same `SKILL.md` structure.
-- Gemini CLI can install or link Agent Skills and also discovers `.agents/skills` aliases.
-- Grok-backed or other coding agents can use the generic prompt adapter in `adapters/generic-prompt.md`.
-
-The most important output is not vendor-specific. `.agent-continuity/CONTINUITY.md` is plain Markdown inside your project folder.
-
-## Install
+Install the skill for your tool, then say **"log work"**.
 
 ### Codex
 
-Install from the skill folder after this repo is published:
+Install from the skill folder:
 
 ```text
 https://github.com/mychaelconnolly/continuity-skill/tree/main/skills/continuity
 ```
 
-For a local install, copy `skills/continuity` into your Codex skills directory, then start a new session or reload skills according to your Codex setup.
+Or copy `skills/continuity` into your Codex skills directory and start a new session.
 
 ### Claude Code
 
-Personal skill:
-
 ```sh
+# personal skill
 mkdir -p ~/.claude/skills
 cp -R skills/continuity ~/.claude/skills/continuity
-```
 
-Project skill:
-
-```sh
+# or project skill
 mkdir -p .claude/skills
 cp -R skills/continuity .claude/skills/continuity
 ```
@@ -103,8 +58,6 @@ cp -R skills/continuity .claude/skills/continuity
 Invoke it directly with `/continuity`, or ask Claude to log continuity when the description matches your request.
 
 ### Gemini CLI
-
-Link a local checkout:
 
 ```sh
 gemini skills link ./skills/continuity
@@ -119,15 +72,58 @@ cp -R skills/continuity .gemini/skills/continuity
 
 Gemini CLI also documents `.agents/skills` as a discovery alias, so the same folder can be shared with other Agent Skills clients.
 
-### Grok-Backed Agents And Other Tools
+### Everything Else
 
-If your tool does not discover Agent Skills, use the generic adapter:
+If your tool does not discover Agent Skills, paste [`adapters/generic-prompt.md`](adapters/generic-prompt.md) into the agent's project instructions or custom prompt area. The behavior is the same: create or update `.agent-continuity/CONTINUITY.md` when explicitly asked.
+
+## What You Get
+
+When invoked, the skill tells the agent to inspect current state and create or update `.agent-continuity/CONTINUITY.md`, capturing:
+
+- current goal
+- verified state and assumptions
+- relevant files
+- commands already run and results
+- tests and validation
+- runtime state when relevant
+- decisions, constraints, risks, and next action
+- a resume prompt for the next session or next tool
+- an append-only work log of past sessions
+
+The record is cumulative. Each run refreshes the current-state head and prepends a new dated work-log entry; it never deletes earlier entries. History is preserved across updates, so you accumulate a record of efforts as they are made, while the top of the file stays a clean resume point.
+
+Then, in any future session or any other tool:
 
 ```text
-adapters/generic-prompt.md
+Resume this project. Read `.agent-continuity/CONTINUITY.md` first, then inspect live state before making changes.
 ```
 
-Paste it into the agent's project instructions or custom prompt area. The behavior is the same: create or update `.agent-continuity/CONTINUITY.md` when explicitly asked.
+More prompts that trigger the skill:
+
+```text
+Use $continuity to log work before I clear this session.
+```
+
+```text
+Save continuity for this project. Include the current goal, changed files, tests run, risks, and next action.
+```
+
+```text
+Prepare for session clearing. Write the project continuity note first.
+```
+
+## Why Manual?
+
+I made this in May 2026, while agent memory is still moving quickly across Codex, Claude, Gemini, Grok-backed tools, MCP memory servers, and stateful-agent frameworks. I expect agentic memory to become more native, consent-aware, auditable, project-scoped, and portable soon.
+
+While that settles, I still want a manual switch:
+
+- "log work"
+- "save continuity"
+- "prepare for session clearing"
+- "write down what the next agent needs"
+
+The result is both agent memory and project documentation. The agent gets the verified state it needs to resume. I get a Markdown record I can inspect, edit, commit or ignore, and carry with the project. Use this when you prefer an intentional memory action instead of background capture.
 
 ## Model Routing (Optional)
 
@@ -145,29 +141,7 @@ cp skills/continuity/profiles/continuity-writer.codex.toml ~/.codex/agents/conti
 
 This is optional: with no profile installed, the skill runs inline on the current model with no loss of function. Routing changes only which model writes the record, never the format or the safety rules. See [`skills/continuity/profiles/README.md`](skills/continuity/profiles/README.md) for profile names, install paths, model-routing behavior, fallback, and the sync workflow.
 
-## Usage
-
-Examples:
-
-```text
-Use $continuity to log work before I clear this session.
-```
-
-```text
-Save continuity for this project. Include the current goal, changed files, tests run, risks, and next action.
-```
-
-```text
-Prepare for session clearing. Write the project continuity note first.
-```
-
-Future resume prompt:
-
-```text
-Resume this project. Read `.agent-continuity/CONTINUITY.md` first, then inspect live state before making changes.
-```
-
-## Ecosystem Fit
+## Where It Fits
 
 This skill is not a replacement for larger memory systems. It fills a narrower gap.
 
@@ -178,13 +152,19 @@ This skill is not a replacement for larger memory systems. It fills a narrower g
 | Stateful-agent frameworks | Letta, LangGraph/LangMem, Zep/Graphiti | Building applications with persistent agent state | Lightweight workflow for local coding projects |
 | Project docs | README, status docs, issue comments | Human-facing durable context | Standard resume shape for agents and humans |
 
-Use this when you prefer an intentional memory action instead of background capture.
-
 ## Safety Model
 
 The skill instructs the agent not to record secrets, tokens, passwords, private keys, raw credential values, or sensitive personal data. It also tells the agent to mark unknowns explicitly instead of guessing.
 
 Because the output is Markdown, you can review it before sharing, committing, or using it with another tool.
+
+## Grounded In Official Guidance
+
+`continuity` follows the published standards for how agent skills should be built — so it triggers reliably, installs cleanly across tools, and ages well as agent memory matures. It is built to the guidance, not just inspired by it:
+
+- **[Agent Skills specification](https://agentskills.io/specification)** (agentskills.io) — the cross-vendor standard the skill conforms to: a `SKILL.md` folder with YAML frontmatter and progressive disclosure.
+- **[Anthropic — Skill authoring best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)** — third-person trigger descriptions, a sub-500-line `SKILL.md`, and eval-first design. The repo ships an [`evals/`](evals/) suite to match.
+- **[OpenAI — Codex Skills](https://developers.openai.com/codex/skills)** — the Codex install path, plus the bundled [`agents/openai.yaml`](skills/continuity/agents/openai.yaml) interface for Codex.
 
 ## Project Layout
 
@@ -194,6 +174,10 @@ continuity-skill/
 ├── LICENSE
 ├── adapters/
 │   └── generic-prompt.md
+├── assets/
+│   ├── continuity-example.png
+│   ├── continuity-mark-dark.svg
+│   └── continuity-mark-light.svg
 ├── evals/
 │   ├── README.md
 │   └── scenarios.md
