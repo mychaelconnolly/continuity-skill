@@ -23,57 +23,72 @@ Ask your agent to "log work" — get a durable, human-readable resume note that 
 
 One note, this shape — filled in here from a fictional but faithful session:
 
-```text
-# Continuity
-
-Last updated: 2026-07-02 09:05 EDT
-Project: `~/lumon/mdr-refinement`
-Branch: `cold-harbor`
-
-## Current Goal
-Refine the Cold Harbor file to 100% before quarter end.
-
-## Current State
-### Facts
-- `refine.py` bins the scary numbers; 96% complete (verified: `./refine --status`)
-### Assumptions
-- The work is mysterious and important. Purpose of the bins: Unknown.
-
-## Changed Or Relevant Files
-- `bins/wellness.json` - four tempers rebalanced
-
-## Commands And Results
-- `./refine --file cold_harbor` - exit 0, 96% → 97%
-
-## Tests And Validation
-- `pytest tests/tempers` - passed (4/4: WO, FC, DR, MA)
-
-## Runtime State
-- macrodata terminal on port 5309 - running
-
-## Decisions And Constraints
-- Board approved the refinement plan; no cross-department pivots without check-in
-
-## Risks And Traps
-- Never prune the Work Log. Memory does not survive the elevator; this file does.
-
-## Next Action
-Run `./refine --file cold_harbor --final`, then request the waffle party.
-
-## Resume Prompt
-Resume work in ~/lumon/mdr-refinement. Read `.agent-continuity/CONTINUITY.md`
-first, then inspect live state before making changes.
-
-## Work Log                                  ← append-only, newest entry first
-
-### 2026-07-02 09:04 EDT - cold harbor push
-- Effort: binned the remaining scary numbers
-- Outcome: 97%; one session from done
-
-### 2026-07-01 16:40 EDT - session severed
-- Effort: refinement paused at 96%
-- Outcome: state preserved for the next innie
-```
+> ### Continuity
+>
+> Last updated: 2026-07-02 09:05 EDT \
+> Project: `~/lumon/mdr-refinement` \
+> Branch: `cold-harbor`
+>
+> #### Current Goal
+>
+> Refine the Cold Harbor file to 100% before quarter end.
+>
+> #### Current State
+>
+> ##### Facts
+>
+> - `refine.py` bins the scary numbers; 96% complete (verified: `./refine --status`)
+>
+> ##### Assumptions
+>
+> - The work is mysterious and important. Purpose of the bins: Unknown.
+>
+> #### Changed Or Relevant Files
+>
+> - `bins/wellness.json` - four tempers rebalanced
+>
+> #### Commands And Results
+>
+> - `./refine --file cold_harbor` - exit 0, 96% → 97%
+>
+> #### Tests And Validation
+>
+> - `pytest tests/tempers` - passed (4/4: WO, FC, DR, MA)
+>
+> #### Runtime State
+>
+> - macrodata terminal on port 5309 - running
+>
+> #### Decisions And Constraints
+>
+> - Board approved the refinement plan; no cross-department pivots without check-in
+>
+> #### Risks And Traps
+>
+> - Never prune the Work Log. Memory does not survive the elevator; this file does.
+>
+> #### Next Action
+>
+> Run `./refine --file cold_harbor --final`, then request the waffle party.
+>
+> #### Resume Prompt
+>
+> Resume work in ~/lumon/mdr-refinement. Read `.agent-continuity/CONTINUITY.md`
+> first, then inspect live state before making changes.
+>
+> #### Work Log
+>
+> *Append-only, newest entry first.*
+>
+> ##### 2026-07-02 09:04 EDT - cold harbor push
+>
+> - Effort: binned the remaining scary numbers
+> - Outcome: 97%; one session from done
+>
+> ##### 2026-07-01 16:40 EDT - session severed
+>
+> - Effort: refinement paused at 96%
+> - Outcome: state preserved for the next innie
 
 The record is cumulative: each run refreshes the head and prepends a dated work-log entry — history is never deleted. See a [full example record](examples/CONTINUITY.example.md).
 
