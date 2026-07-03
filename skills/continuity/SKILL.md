@@ -1,6 +1,6 @@
 ---
 name: continuity
-description: Use when the user asks to preserve work state for later, including "continuity", "continuity log", "log work", "save state", "continue later", "resume work", "resume note", "session clearing", "history clearing", "memory clearing", or "save critical context". Create concise project-local continuity records so a future agent session can resume accurately.
+description: Use when the user asks to preserve work state for later, including "continuity", "continuity log", "log work", "save state", "continue later", "resume note", "session clearing", "history clearing", "memory clearing", or "save critical context" — or asks to pick work back up from a saved record, including "pull up <project>", "resume <project>", "resume work on <project>", "where were we", "pick up where we left off", or "continue <project>". Create concise project-local continuity records so a future agent session can resume accurately, and resume from them on request.
 ---
 
 # Continuity
@@ -17,9 +17,19 @@ Do not create scripts, templates, README files, changelogs, or auxiliary files f
 
 ### Continuity Log
 
-Default mode for "save state", "continue later", "resume work", "log work", and similar requests.
+Default mode for "save state", "continue later", "log work", and similar requests.
 
 Goal: record the minimum verified state needed for a future agent session to continue without rediscovery.
+
+### Resume
+
+Use when the user asks to pick work back up: "pull up <project>", "resume <project>", "resume work on <project>", "where were we", "pick up where we left off", "continue <project>", and similar. Treat any short phrase whose intent is "load prior context and continue" as this mode.
+
+1. Resolve the project root (see Project Root). If the request names a project, match the name against the current directory and nearby project folders; ask only when nothing matches.
+2. Read `.agent-continuity/CONTINUITY.md` — the head first, then recent Work Log entries.
+3. Verify the head against live state before acting (`git status --short --branch`, runtime state when recorded); the record may be stale.
+4. Report the current goal and next action in one or two lines, then continue the work. Do not rewrite the record as part of resuming; log again only at the next natural stopping point.
+5. If no record exists, say so, continue from live inspection, and offer to start a record at the next stopping point.
 
 ### Continuity Audit
 

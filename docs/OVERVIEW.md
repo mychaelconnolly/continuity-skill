@@ -26,10 +26,16 @@ When invoked, the skill tells the agent to inspect current state and create or u
 
 The record is cumulative. Each run refreshes the current-state head and prepends a new dated work-log entry; it never deletes earlier entries. History is preserved across updates, so you accumulate a record of efforts as they are made, while the top of the file stays a clean resume point.
 
-Then, in any future session or any other tool:
+Then, in any future session:
 
 ```text
-Resume this project. Read `.agent-continuity/CONTINUITY.md` first, then inspect live state before making changes.
+pull up <project>
+```
+
+Short resume phrasings — "resume work on <project>", "where were we", "pick up where we left off" — are recognized as resume intent: the skill reads the record head, verifies it against live state, reports the goal and next action, and continues without rewriting the record. In a tool without the skill installed, paste the note's own Resume Prompt section instead — every record carries a portable one:
+
+```text
+Resume work in <project path>. Read `.agent-continuity/CONTINUITY.md` first, then inspect live state before making changes.
 ```
 
 More prompts that trigger the skill:

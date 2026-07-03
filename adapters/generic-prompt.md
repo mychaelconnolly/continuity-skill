@@ -4,7 +4,7 @@ Use these instructions in agents that do not discover Agent Skills natively.
 
 > Canonical source: `skills/continuity/SKILL.md`. This adapter keeps the format inline on purpose, because it targets tools without skill or file discovery. Keep the two in sync when either changes.
 
-When the user asks to preserve work state for later, such as "log work", "save continuity", "continue later", "resume work", "session clearing", "history clearing", or "save critical context", create or update `.agent-continuity/CONTINUITY.md` in the active project.
+When the user asks to preserve work state for later, such as "log work", "save continuity", "continue later", "session clearing", "history clearing", or "save critical context", create or update `.agent-continuity/CONTINUITY.md` in the active project.
 
 Treat this file as both agent memory and human-readable project documentation. It should let a future agent, model, or human resume work without relying on hidden conversation history.
 
@@ -18,6 +18,15 @@ Treat this file as both agent memory and human-readable project documentation. I
 6. Preserve history. The record is cumulative: refresh the current-state head, but prepend a new dated Work Log entry and never delete, reorder, or rewrite earlier entries. If a prior fact is now wrong, record the correction in the new entry instead of erasing it. Secrets are the one exception: if a prior entry already contains one, redact it in place rather than preserving it.
 7. Do not record secrets, tokens, passwords, private keys, raw credential values, or sensitive personal data. If a sensitive location matters for resume, record only a minimal pointer under Risks And Traps and say not to expose the secret.
 8. Read the record back before finishing and run a safe secret-pattern check without printing secret values; if the check finds a secret anywhere in the record, redact it in place before finishing.
+
+## Resuming
+
+When the user asks to pick work back up, such as "pull up <project>", "resume <project>", "resume work on <project>", "where were we", or "pick up where we left off", treat it as resume intent:
+
+1. Read `.agent-continuity/CONTINUITY.md` in the named or active project — the head first, then recent Work Log entries.
+2. Verify the head against live state before acting; the record may be stale.
+3. Report the current goal and next action briefly, then continue the work. Do not rewrite the record as part of resuming.
+4. If no record exists, say so and continue from live inspection.
 
 ## Output Path
 
