@@ -5,6 +5,17 @@ covering optional model routing (normal routing, fallback, and escalation). Each
 fields `skills`, `query`, optional `setup` (starting state) and `files` (input paths), and
 `expected_behavior` (graded assertions). See [README.md](README.md) for how to run them.
 
+## Contents
+
+1. log-work-happy-path
+2. preserve-history-on-update
+3. session-clearing-audit
+4. secret-leak-avoidance
+5. secret-redaction-on-update
+6. routing-prefers-low-effort-writer
+7. routing-fallback-no-profile
+8. routing-escalation-keeps-risky-work-on-stronger-model
+
 ## 1. log-work-happy-path
 
 Default Continuity Log on a fresh project.

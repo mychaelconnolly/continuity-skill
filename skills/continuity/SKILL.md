@@ -36,7 +36,7 @@ Record the local project path plus runtime state, read/write boundaries, status 
 ## Model Routing
 
 Optional cost optimization. If a `continuity-writer` profile is installed (a Claude subagent or a Codex
-custom agent; see `profiles/`), an **ordinary Continuity Log** may be delegated to it so the routine
+custom agent; see [profiles/README.md](profiles/README.md)), an **ordinary Continuity Log** may be delegated to it so the routine
 writing runs on a strong one-tier-down model at low effort. This is opt-in and never required.
 
 **Prefer** to delegate to `continuity-writer` only when **all** of these hold; otherwise run the skill

@@ -29,7 +29,7 @@ Create `.agent-continuity/` if needed.
 
 ## Output Shape
 
-```md
+````md
 # Continuity
 
 Last updated: <local timestamp with timezone>
@@ -94,4 +94,4 @@ Append-only. Newest entry first. Never edit or delete earlier entries.
 - Effort: <what this session worked on>
 - Changed: <files, commands, or state touched, or `None`>
 - Outcome: <result, decision, or correction to an earlier entry>
-```
+````
