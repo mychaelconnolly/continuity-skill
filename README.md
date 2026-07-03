@@ -19,6 +19,8 @@ Ask your agent to "log work" — get a durable, human-readable resume note that 
 
 `continuity` is a small [Agent Skill](https://agentskills.io/specification) that writes a project-local memory note at `.agent-continuity/CONTINUITY.md` — on demand, never in the background. It is intentionally boring: one `SKILL.md`, one Markdown output file, no service, no database, no background capture.
 
+Built to the [Agent Skills specification](https://agentskills.io/specification) and [Anthropic's skill-authoring best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices), with an [eval suite](evals/) to match — see [Grounded In Official Guidance](docs/OVERVIEW.md#grounded-in-official-guidance).
+
 ## What It Leaves Behind
 
 <img src="assets/continuity-sample.svg" width="761" alt="Sample CONTINUITY.md record: current goal, facts vs assumptions, commands with results, runtime state, next action, resume prompt, and an append-only work log.">
@@ -51,18 +53,16 @@ Then, at any natural stopping point:
 log work
 ```
 
-And in any future session, with any tool:
+And in any future session:
 
 ```text
-Resume this project. Read `.agent-continuity/CONTINUITY.md` first, then inspect live state before making changes.
+pull up <project>
 ```
+
+`resume work on <project>` and `where were we` work too — the skill recognizes resume intent, reads the record, verifies it against live state, and continues. In a tool without the skill, paste the note's own portable [Resume Prompt](examples/CONTINUITY.example.md#resume-prompt) instead — every record carries one.
 
 ## More
 
 - **[Overview & details](docs/OVERVIEW.md)** — why manual memory, what gets recorded, ecosystem fit, safety model, and the standards this is built to.
 - **[Model routing (optional)](docs/OVERVIEW.md#model-routing-optional)** — run ordinary logging on a cheaper one-tier-down model via the bundled `continuity-writer` profiles.
 - **[Full example record](examples/CONTINUITY.example.md)** — a complete `.agent-continuity/CONTINUITY.md`.
-
-## License
-
-MIT.
