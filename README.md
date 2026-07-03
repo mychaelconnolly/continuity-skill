@@ -21,39 +21,81 @@ Ask your agent to "log work" — get a durable, human-readable resume note that 
 
 ## What It Leaves Behind
 
-```md
+One note, this shape — filled in here from a fictional but faithful session:
+
+```text
 # Continuity
 
-Last updated: <timestamp>
-Project: <absolute path>
+Last updated: 2026-07-02 09:05 EDT
+Project: `~/lumon/mdr-refinement`
+Branch: `cold-harbor`
 
 ## Current Goal
-## Current State              ← facts vs assumptions, unknowns marked
+Refine the Cold Harbor file to 100% before quarter end.
+
+## Current State
+### Facts
+- `refine.py` bins the scary numbers; 96% complete (verified: `./refine --status`)
+### Assumptions
+- The work is mysterious and important. Purpose of the bins: Unknown.
+
 ## Changed Or Relevant Files
+- `bins/wellness.json` - four tempers rebalanced
+
 ## Commands And Results
+- `./refine --file cold_harbor` - exit 0, 96% → 97%
+
 ## Tests And Validation
+- `pytest tests/tempers` - passed (4/4: WO, FC, DR, MA)
+
 ## Runtime State
+- macrodata terminal on port 5309 - running
+
 ## Decisions And Constraints
+- Board approved the refinement plan; no cross-department pivots without check-in
+
 ## Risks And Traps
+- Never prune the Work Log. Memory does not survive the elevator; this file does.
+
 ## Next Action
-## Resume Prompt              ← paste into the next session, any tool
-## Work Log                   ← append-only, newest entry first
+Run `./refine --file cold_harbor --final`, then request the waffle party.
+
+## Resume Prompt
+Resume work in ~/lumon/mdr-refinement. Read `.agent-continuity/CONTINUITY.md`
+first, then inspect live state before making changes.
+
+## Work Log                                  ← append-only, newest entry first
+
+### 2026-07-02 09:04 EDT - cold harbor push
+- Effort: binned the remaining scary numbers
+- Outcome: 97%; one session from done
+
+### 2026-07-01 16:40 EDT - session severed
+- Effort: refinement paused at 96%
+- Outcome: state preserved for the next innie
 ```
 
 The record is cumulative: each run refreshes the head and prepends a dated work-log entry — history is never deleted. See a [full example record](examples/CONTINUITY.example.md).
 
 ## Quick Start
 
-```sh
-# Claude Code — then invoke with /continuity or ask to "log work"
-cp -R skills/continuity ~/.claude/skills/continuity
+Point your agent at the repo:
 
-# Gemini CLI
-gemini skills link ./skills/continuity
+```text
+Install the continuity Agent Skill from
+https://github.com/mychaelconnolly/continuity-skill — copy skills/continuity
+into your skills directory and reload skills.
 ```
 
-- **Codex** — install from [`skills/continuity`](https://github.com/mychaelconnolly/continuity-skill/tree/main/skills/continuity), or copy that folder into your Codex skills directory.
-- **Anything else** — paste [`adapters/generic-prompt.md`](adapters/generic-prompt.md) into the agent's custom instructions.
+Or manually — same move everywhere, only the destination differs:
+
+```sh
+git clone https://github.com/mychaelconnolly/continuity-skill
+cp -R continuity-skill/skills/continuity <your-skills-dir>
+# e.g. ~/.claude/skills, ~/.codex/skills, ~/.agents/skills, .gemini/skills
+```
+
+If your tool does not discover Agent Skills at all, paste [`adapters/generic-prompt.md`](adapters/generic-prompt.md) into its custom instructions instead. Per-tool notes live in [docs/OVERVIEW.md](docs/OVERVIEW.md#install).
 
 Then, at any natural stopping point:
 

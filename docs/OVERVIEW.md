@@ -46,6 +46,53 @@ Save continuity for this project. Include the current goal, changed files, tests
 Prepare for session clearing. Write the project continuity note first.
 ```
 
+## Install
+
+The generic path in the [README Quick Start](../README.md#quick-start) works everywhere: copy `skills/continuity` into your tool's skills directory. Per-tool notes:
+
+### Codex
+
+Install from the skill folder:
+
+```text
+https://github.com/mychaelconnolly/continuity-skill/tree/main/skills/continuity
+```
+
+Or copy `skills/continuity` into your Codex skills directory, then start a new session or reload skills according to your Codex setup.
+
+### Claude Code
+
+```sh
+# personal skill
+mkdir -p ~/.claude/skills
+cp -R skills/continuity ~/.claude/skills/continuity
+
+# or project skill
+mkdir -p .claude/skills
+cp -R skills/continuity .claude/skills/continuity
+```
+
+Invoke it directly with `/continuity`, or ask Claude to log continuity when the description matches your request.
+
+### Gemini CLI
+
+```sh
+gemini skills link ./skills/continuity
+```
+
+Or copy it into a project:
+
+```sh
+mkdir -p .gemini/skills
+cp -R skills/continuity .gemini/skills/continuity
+```
+
+Gemini CLI also documents `.agents/skills` as a discovery alias, so the same folder can be shared with other Agent Skills clients.
+
+### Everything Else
+
+If your tool does not discover Agent Skills, paste [`adapters/generic-prompt.md`](../adapters/generic-prompt.md) into the agent's project instructions or custom prompt area. The behavior is the same: create or update `.agent-continuity/CONTINUITY.md` when explicitly asked.
+
 ## Why Manual?
 
 I made this in May 2026, while agent memory is still moving quickly across Codex, Claude, Gemini, Grok-backed tools, MCP memory servers, and stateful-agent frameworks. I expect agentic memory to become more native, consent-aware, auditable, project-scoped, and portable soon.
