@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="761" height="1115" viewBox="0 0 761 1115" role="img" aria-label="Sample CONTINUITY.md record">
+  <style>
+    .t { font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-size: 14px; white-space: pre; }
+    .h1 { fill: #f7f6f9; font-weight: 700; }
+    .h2 { fill: #7da17e; font-weight: 600; }
+    .h3 { fill: #98b6b0; font-weight: 600; }
+    .tx { fill: #d6e0e2; }
+    .cd { fill: #98b6b0; }
+    .hi { fill: #f7f6f9; font-weight: 600; }
+    .an { fill: #98b6b0; font-style: italic; font-weight: 400; fill-opacity: 0.85; }
+  </style>
+  <rect x="0.5" y="0.5" width="760" height="1114" rx="10" fill="#163f38" stroke="#98b6b0" stroke-opacity="0.3"/>
+  <text x="28" y="41" class="t h1"># Continuity</text>
+  <text x="28" y="83" class="t tx">Last updated: 2026-07-02 09:05 EDT</text>
+  <text x="28" y="104" class="t tx">Project: <tspan class="cd">`~/lumon/mdr-refinement`</tspan></text>
+  <text x="28" y="125" class="t tx">Branch: <tspan class="cd">`cold-harbor`</tspan></text>
+  <text x="28" y="167" class="t h2">## Current Goal</text>
+  <text x="28" y="188" class="t tx">Refine the Cold Harbor file to 100% before quarter end. Kier expects it;</text>
+  <text x="28" y="209" class="t tx">the board is watching.</text>
+  <text x="28" y="251" class="t h2">## Current State</text>
+  <text x="28" y="272" class="t h3">### Facts</text>
+  <text x="28" y="293" class="t tx">- <tspan class="cd">`refine.py`</tspan> bins the scary numbers; <tspan class="hi">96% complete</tspan> (verified: <tspan class="cd">`./refine --status`</tspan>)</text>
+  <text x="28" y="314" class="t tx">- Quarter ends Friday; two refinement sessions remain on the calendar</text>
+  <text x="28" y="335" class="t h3">### Assumptions</text>
+  <text x="28" y="356" class="t tx">- The work is mysterious and important. Purpose of the bins: <tspan class="hi">Unknown</tspan>.</text>
+  <text x="28" y="398" class="t h2">## Changed Or Relevant Files</text>
+  <text x="28" y="419" class="t tx">- <tspan class="cd">`bins/wellness.json`</tspan> - four tempers rebalanced (WO up, FC down)</text>
+  <text x="28" y="461" class="t h2">## Commands And Results</text>
+  <text x="28" y="482" class="t tx">- <tspan class="cd">`./refine --file cold_harbor`</tspan> - exit 0, <tspan class="hi">96% → 97%</tspan>, no numbers felt missed</text>
+  <text x="28" y="524" class="t h2">## Tests And Validation</text>
+  <text x="28" y="545" class="t tx">- <tspan class="cd">`pytest tests/tempers`</tspan> - <tspan class="hi">passed</tspan> (4/4: WO, FC, DR, MA)</text>
+  <text x="28" y="587" class="t h2">## Runtime State</text>
+  <text x="28" y="608" class="t tx">- macrodata terminal on port 5309 - <tspan class="hi">running</tspan>; do not close the lid</text>
+  <text x="28" y="650" class="t h2">## Decisions And Constraints</text>
+  <text x="28" y="671" class="t tx">- Board approved the refinement plan; no cross-department pivots without check-in</text>
+  <text x="28" y="713" class="t h2">## Risks And Traps</text>
+  <text x="28" y="734" class="t tx">- Never prune the Work Log. Memory does not survive the elevator; this file does.</text>
+  <text x="28" y="776" class="t h2">## Next Action</text>
+  <text x="28" y="797" class="t tx">Run <tspan class="cd">`./refine --file cold_harbor --final`</tspan>, then request the waffle party.</text>
+  <text x="28" y="839" class="t h2">## Resume Prompt</text>
+  <text x="28" y="860" class="t tx">Resume work in ~/lumon/mdr-refinement. Read <tspan class="cd">`.agent-continuity/CONTINUITY.md`</tspan></text>
+  <text x="28" y="881" class="t tx">first, then inspect live state before making changes.</text>
+  <text x="28" y="923" class="t h2" xml:space="preserve">## Work Log<tspan class="an">                                 ← append-only, newest entry first</tspan></text>
+  <text x="28" y="965" class="t h3">### 2026-07-02 09:04 EDT - cold harbor push</text>
+  <text x="28" y="986" class="t tx">- Effort: binned the remaining scary numbers before the 09:00 wellness check</text>
+  <text x="28" y="1007" class="t tx">- Outcome: <tspan class="hi">97%</tspan>; one session from done</text>
+  <text x="28" y="1049" class="t h3">### 2026-07-01 16:40 EDT - session severed</text>
+  <text x="28" y="1070" class="t tx">- Effort: refinement paused at 96% when the clock hit the elevator</text>
+  <text x="28" y="1091" class="t tx">- Outcome: state preserved for the next innie</text>
+</svg>
